@@ -13,6 +13,8 @@
 	},
 	// Environment variables (actual values should be set with secrets)
 	// You can set LANGUAGE to "en" (English) or "ja" (Japanese)
+	// DISCORD_WEBHOOK_URL should be set as a secret
+	// FORWARD_EMAIL_ADDRESSES can be set as a secret (comma-separated list of email addresses)
 	"vars": {
 		"LANGUAGE": "ja" // Default to Japanese, can be changed to "en" for English
 	},

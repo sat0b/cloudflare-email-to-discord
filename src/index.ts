@@ -13,6 +13,8 @@ export interface Env {
 	DISCORD_WEBHOOK_URL: string;
 	// Language setting: "en" for English, "ja" for Japanese
 	LANGUAGE?: string;
+	// Email forwarding destinations (comma-separated list of email addresses)
+	FORWARD_EMAIL_ADDRESSES?: string;
 }
 
 // Cloudflare email-related type definitions
@@ -21,6 +23,7 @@ interface EmailMessage {
 	readonly to: string;
 	readonly headers: Headers;
 	readonly raw: ReadableStream;
+	forward(email: string): Promise<void>;
 }
 
 // Text content for different languages
@@ -61,6 +64,16 @@ export default {
 			const lang = env.LANGUAGE === 'ja' ? 'ja' : 'en';
 			const t = translations[lang];
 			const locale = lang === 'ja' ? 'ja-JP' : 'en-US';
+
+			// Forward email to additional email addresses if configured
+			if (env.FORWARD_EMAIL_ADDRESSES) {
+				const emailAddresses = env.FORWARD_EMAIL_ADDRESSES.split(',').map((email) => email.trim());
+				for (const email of emailAddresses) {
+					if (email) {
+						await message.forward(email);
+					}
+				}
+			}
 
 			// Parse email content
 			const rawEmail = await streamToString(message.raw);

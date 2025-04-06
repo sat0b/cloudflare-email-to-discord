@@ -1,10 +1,11 @@
 # Cloudflare Email to Discord
 
-A Cloudflare Worker that receives emails from Cloudflare Email Routing and forwards them to Discord webhooks.
+A Cloudflare Worker that receives emails from Cloudflare Email Routing and forwards them to Discord webhooks and other email addresses.
 
 ## Features
 
 - Forward emails received via Cloudflare Email Routing to Discord channels
+- Forward emails to additional email addresses
 - Format and display sender, subject, content, and receipt time
 - Quick and easy setup with minimal configuration
 - Support for both English and Japanese languages
@@ -21,7 +22,15 @@ A Cloudflare Worker that receives emails from Cloudflare Email Routing and forwa
 npx wrangler secret put DISCORD_WEBHOOK_URL
 ```
 
-5. (Optional) Configure the language setting
+5. (Optional) Configure forwarding email addresses
+
+```bash
+# Set email forwarding destinations (comma-separated list)
+npx wrangler secret put FORWARD_EMAIL_ADDRESSES
+# Enter comma-separated email addresses, e.g., "user@gmail.com,user@outlook.com"
+```
+
+6. (Optional) Configure the language setting
    - Default is Japanese ("ja")
    - Set to "en" for English in wrangler.jsonc or via the Cloudflare dashboard
 
@@ -31,13 +40,13 @@ npx wrangler secret put LANGUAGE
 # Then enter "en" for English or "ja" for Japanese
 ```
 
-6. Deploy the worker
+7. Deploy the worker
 
 ```bash
 npm run deploy
 ```
 
-7. Configure Cloudflare Email Routing
+8. Configure Cloudflare Email Routing
    - Navigate to Email > Email Routing in your Cloudflare dashboard
    - Create a new rule to forward emails to your worker
 
