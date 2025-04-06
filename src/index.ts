@@ -23,6 +23,7 @@ interface EmailMessage {
 	readonly to: string;
 	readonly headers: Headers;
 	readonly raw: ReadableStream;
+
 	forward(email: string): Promise<void>;
 }
 
@@ -41,7 +42,7 @@ const translations = {
 		viaCloudflare: 'Via Cloudflare Email Routing',
 		serviceRunning: 'Email to Discord forwarding service is running. Processing emails from Cloudflare Email Routing.',
 		errorProcessing: 'Error processing email:',
-		unknownRecipient: 'Unknown recipient',
+		unknownRecipient: 'Unknown recipient'
 	},
 	ja: {
 		unknownSender: '不明な送信者',
@@ -56,8 +57,8 @@ const translations = {
 		viaCloudflare: 'Cloudflare Email Routing経由',
 		serviceRunning: 'Email to Discord転送サービスが稼働中です。Cloudflare Email Routingからのメールを処理します。',
 		errorProcessing: 'メール処理中にエラーが発生しました:',
-		unknownRecipient: '不明な宛先',
-	},
+		unknownRecipient: '不明な宛先'
+	}
 };
 
 export default {
@@ -101,18 +102,18 @@ export default {
 						fields: [
 							{ name: t.from, value: from, inline: true },
 							{ name: t.to, value: to, inline: true },
-							{ name: t.received, value: date, inline: true },
+							{ name: t.received, value: date, inline: true }
 						],
-						footer: { text: t.viaCloudflare },
-					},
-				],
+						footer: { text: t.viaCloudflare }
+					}
+				]
 			};
 
 			// Post to Discord webhook
 			await fetch(env.DISCORD_WEBHOOK_URL, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(discordMessage),
+				body: JSON.stringify(discordMessage)
 			});
 		} catch (error) {
 			const lang = env.LANGUAGE === 'ja' ? 'ja' : 'en';
@@ -124,7 +125,7 @@ export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const lang = env.LANGUAGE === 'ja' ? 'ja' : 'en';
 		return new Response(translations[lang].serviceRunning);
-	},
+	}
 };
 
 // Utility function to convert ReadableStream to String
