@@ -22,8 +22,8 @@ npx wrangler secret put DISCORD_WEBHOOK_URL
 ```
 
 5. (Optional) Configure the language setting
-   - Default is English ("en")
-   - Set to "ja" for Japanese in wrangler.jsonc or via the Cloudflare dashboard
+   - Default is Japanese ("ja")
+   - Set to "en" for English in wrangler.jsonc or via the Cloudflare dashboard
 
 ```bash
 # Or change the language via environment variable
@@ -65,8 +65,8 @@ You can customize the message format and error handling by editing `src/index.ts
 
 This worker supports both English and Japanese languages for the Discord messages:
 
-- Set `LANGUAGE` to `"en"` for English (default)
-- Set `LANGUAGE` to `"ja"` for Japanese
+- Set `LANGUAGE` to `"en"` for English
+- Set `LANGUAGE` to `"ja"` for Japanese (default)
 
 You can set this in the `wrangler.jsonc` file under the `vars` section or via the Cloudflare dashboard.
 

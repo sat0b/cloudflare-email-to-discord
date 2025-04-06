@@ -11,14 +11,10 @@
 	"observability": {
 		"enabled": true
 	},
-	// Cloudflare Email Routing configuration
-	"email_provider": {
-		"name": "cloudflare"
-	},
 	// Environment variables (actual values should be set with secrets)
 	// You can set LANGUAGE to "en" (English) or "ja" (Japanese)
 	"vars": {
-		"LANGUAGE": "en" // Default to English, can be changed to "ja" for Japanese
+		"LANGUAGE": "ja" // Default to Japanese, can be changed to "en" for English
 	},
 	// Production environment
 	"env": {
