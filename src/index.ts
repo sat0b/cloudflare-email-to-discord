@@ -35,11 +35,13 @@ const translations = {
 		noContent: 'No content',
 		newEmailReceived: 'New Email Received',
 		from: 'From',
+		to: 'To',
 		received: 'Received',
 		truncated: '...(truncated)',
 		viaCloudflare: 'Via Cloudflare Email Routing',
 		serviceRunning: 'Email to Discord forwarding service is running. Processing emails from Cloudflare Email Routing.',
 		errorProcessing: 'Error processing email:',
+		unknownRecipient: 'Unknown recipient',
 	},
 	ja: {
 		unknownSender: '不明な送信者',
@@ -48,11 +50,13 @@ const translations = {
 		noContent: '本文なし',
 		newEmailReceived: '新しいメールを受信しました',
 		from: '送信者',
+		to: '宛先',
 		received: '受信日時',
 		truncated: '...(以下省略)',
 		viaCloudflare: 'Cloudflare Email Routing経由',
 		serviceRunning: 'Email to Discord転送サービスが稼働中です。Cloudflare Email Routingからのメールを処理します。',
 		errorProcessing: 'メール処理中にエラーが発生しました:',
+		unknownRecipient: '不明な宛先',
 	},
 };
 
@@ -84,6 +88,7 @@ export default {
 			const subject = parsedEmail.subject || t.noSubject;
 			const date = parsedEmail.date?.toLocaleString(locale) || t.unknownDate;
 			const textContent = parsedEmail.text || t.noContent;
+			const to = message.to || t.unknownRecipient;
 
 			// Create Discord message
 			const discordMessage = {
@@ -95,6 +100,7 @@ export default {
 						color: 0x00bfff,
 						fields: [
 							{ name: t.from, value: from, inline: true },
+							{ name: t.to, value: to, inline: true },
 							{ name: t.received, value: date, inline: true },
 						],
 						footer: { text: t.viaCloudflare },
