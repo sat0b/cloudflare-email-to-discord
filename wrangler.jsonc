@@ -7,8 +7,15 @@
 	"name": "cloudflare-email-to-discord",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-04-05",
+	"compatibility_flags": ["nodejs_compat"],
 	"observability": {
 		"enabled": true
+	},
+	"vars": {},
+	"env": {
+		"production": {
+			"name": "cloudflare-email-to-discord"
+		}
 	}
 	/**
 	 * Smart Placement
