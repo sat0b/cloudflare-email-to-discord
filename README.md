@@ -68,7 +68,7 @@ This worker supports both English and Japanese languages for the Discord message
 - Set `LANGUAGE` to `"en"` for English (default)
 - Set `LANGUAGE` to `"ja"` for Japanese
 
-You can set this in the `wrangler.jsonc` file or via the Cloudflare dashboard.
+You can set this in the `wrangler.jsonc` file under the `vars` section or via the Cloudflare dashboard.
 
 ## License
 
